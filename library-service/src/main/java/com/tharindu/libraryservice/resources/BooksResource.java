@@ -33,7 +33,7 @@ public class BooksResource {
     @RequestMapping("/{bookId}")
     public BooksInfo getBook(@PathVariable("bookId") int bookId) {
 
-        Book book = restTemplate.getForObject("http://localhost:8081/bookInfo/" + bookId, Book.class);
+        Book book = restTemplate.getForObject("http://book-info-service/bookInfo/" + bookId, Book.class);
         if (Objects.isNull(book)) {
             book.setAvailable(false);
         }
@@ -41,7 +41,7 @@ public class BooksResource {
             book.setAvailable(true);
         }
 
-        Review review = restTemplate.getForObject("http://localhost:8083/reviews/" + bookId, Review.class);
+        Review review = restTemplate.getForObject("http://my-favorites-service/reviews/" + bookId, Review.class);
         if (Objects.isNull(review)) {
             book.setFavorite(false);
             book.setReview(null);
